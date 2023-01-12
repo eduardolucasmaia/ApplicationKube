@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  #maia.eduardo.webapi:
+  #  environment:
+  #    - ASPNETCORE_ENVIRONMENT=Development
+  #    - ASPNETCORE_URLS=https://+:443;http://+:80
+  #  ports:
+  #    - "7033:80"
+  #    #- "443"
+  #  volumes:
+  #    - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+  #    - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+  maia.eduardo.webapp:
+    ports:
+      - "5013:80"
+      #- "443"
+    #depends_on:
+    #  - maia.eduardo.webapi

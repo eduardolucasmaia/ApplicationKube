@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  #maia.eduardo.webapi:
+  #  image: ${DOCKER_REGISTRY-}maiaeduardowebapi
+  #  build:
+  #    context: .
+  #    dockerfile: maia.eduardo.webapi/Dockerfile
+  maia.eduardo.webapp:
+    image: ${DOCKER_REGISTRY-}maiaeduardowebapp
+    build:
+      context: .
+      dockerfile: maia.eduardo.webapp/Dockerfile
+      args:
+        VUE_APP_API_URL: http://localhost:7033
+        VUE_APP_ENVIRONMENT: Production

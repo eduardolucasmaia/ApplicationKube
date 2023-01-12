@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webapiex-ingress
+  namespace: maia-eduardo-webapp
+spec:
+  rules:
+    - host: localhost
+      http:
+        paths:
+          - path: /webapp
+            pathType: Prefix
+            backend:
+              service:
+                name: webapploadbalancer
+                port:
+                  number: 5003

@@ -19,7 +19,7 @@
                 envApi: null,
                 envWeb: process.env.VUE_APP_ENVIRONMENT,
                 appVersion: process.env.VUE_APP_VERSION,
-                route: process.env.VUE_APP_BASE_API_URL
+                route: process.env.VUE_APP_API_URL
             };
         },
         props: {
@@ -27,13 +27,13 @@
         },
         created: function () {
             axios
-                .get(`${process.env.VUE_APP_BASE_API_URL}/WindowsUser/GetUser`, { withCredentials: true })
+                .get(`${process.env.VUE_APP_API_URL}/WindowsUser/GetUser`, { withCredentials: true })
                 .then(res => {
                     this.user = res.data;
                 });
 
             axios
-                .get(`${process.env.VUE_APP_BASE_API_URL}/WindowsUser/GetAppSettings`, { withCredentials: true })
+                .get(`${process.env.VUE_APP_API_URL}/WindowsUser/GetAppSettings`, { withCredentials: true })
                 .then(res => {
                     this.envApi = res.data;
                 });

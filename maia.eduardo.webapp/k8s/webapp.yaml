@@ -1,0 +1,82 @@
+#https://docs.k0sproject.io/v1.22.1+k0s.1/examples/nginx-ingress/
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: maia-eduardo-webapp
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-v1
+  namespace: maia-eduardo-webapp
+  labels:
+    app: webapp
+    version: v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      # service: webapp
+      app: webapp
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: webapp
+        # service: webapp
+        version: v1
+    spec:
+      containers:
+        - name: webapp
+          image: eduardolucasmaia/dockerhub:maiaeduardowebapp
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: webapp-port
+              containerPort: 80
+              protocol: TCP
+
+
+---
+
+
+ apiVersion: v1
+ kind: Service
+ metadata:
+   name: webapp
+   namespace: maia-eduardo-webapp
+   labels:
+     app: webapp
+     service: webapp
+ spec:
+   type: ClusterIP
+   ports:
+     - port: 5004
+       targetPort: 80
+       protocol: TCP
+   selector:
+       app: webapp
+       # service: webapp
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapploadbalancer
+  namespace: maia-eduardo-webapp
+  labels:
+    app: webapp
+    service: webapp
+spec:
+  selector:
+    app: webapp
+  ports:
+    - protocol: TCP
+      port: 5003
+      targetPort: 80
+  type: LoadBalancer
